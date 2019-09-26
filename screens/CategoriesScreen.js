@@ -1,7 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet, FlatList, TouchableOpacity } from "react-native";
 
-import Colors from "../constants/Colors";
 import { CATEGORIES } from "../data/mock-data";
 
 const CategoriesScreen = ({ navigation }) => {
@@ -10,7 +9,12 @@ const CategoriesScreen = ({ navigation }) => {
       <TouchableOpacity
         style={styles.gridItem}
         onPress={() => {
-          navigation.navigate("CategoryMeals");
+          navigation.navigate({
+            routeName: "CategoryMeals",
+            params: {
+              categoryId: itemData.item.id
+            }
+          });
         }}
       >
         <View>
@@ -28,14 +32,6 @@ const CategoriesScreen = ({ navigation }) => {
       numColumns={2}
     />
   );
-};
-
-CategoriesScreen.navigationOptions = {
-  headerTitle: "Categories",
-  headerStyle: {
-    backgroundColor: Colors.primaryColor
-  },
-  headerTintColor: Colors.accentColor
 };
 
 const styles = StyleSheet.create({
