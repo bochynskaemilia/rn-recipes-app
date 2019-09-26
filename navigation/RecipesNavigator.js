@@ -22,9 +22,9 @@ const RecipesNavigator = createStackNavigator(
   {
     defaultNavigationOptions: {
       headerStyle: {
-        backgroundColor: Colors.primaryColor
+        backgroundColor: Colors.accentColor
       },
-      headerTintColor: Colors.accentColor
+      headerTintColor: Colors.primaryColor
     }
   }
 );

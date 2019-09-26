@@ -1,5 +1,6 @@
 export default {
-  primaryColor: "#2EC4B6",
+  primaryColor: "#694967",
   secondaryColor: "#CBF3F0",
-  accentColor: "#FFF"
+  accentColor: "#FFF",
+  backgroundColor: "#E3DDE3"
 };
