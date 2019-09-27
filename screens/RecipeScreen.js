@@ -1,32 +1,55 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
-import { MEALS } from "../data/mock-data";
+import { ScrollView, View, Image, Text, Button, StyleSheet } from "react-native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
+import { MEALS } from "../data/mock-data";
 
 import HeaderButton from "../components/HeaderButtons";
+import OpenSansText from "../components/OpenSansText";
+import Colors from "../constants/Colors";
 
-const RecipeScreen = ({ navigation }) => {
-  const recipeId = navigation.getParam("recipeId");
-  const recipe = MEALS.find(meal => recipeId === meal.id);
-
+const ListItem = props => {
   return (
-    <View style={styles.screen}>
-      <Text>{recipe.title}</Text>
+    <View style={styles.listItem}>
+      <OpenSansText>{props.children}</OpenSansText>
     </View>
   );
 };
 
-RecipeScreen.navigationOptions = navigationData => {
-  const recipeId = navigationData.navigation.getParam("recipeId");
-  const recipe = MEALS.find(meal => recipeId === meal.id);
+const RecipeScreen = props => {
+  const mealId = props.navigation.getParam("recipeId");
 
+  const selectedMeal = MEALS.find(meal => meal.id === mealId);
+
+  return (
+    <ScrollView>
+      <Image source={{ uri: selectedMeal.imageUrl }} style={styles.image} />
+      <View style={styles.details}>
+        <OpenSansText>{selectedMeal.duration}m</OpenSansText>
+        <OpenSansText>{selectedMeal.complexity.toUpperCase()}</OpenSansText>
+        <OpenSansText>{selectedMeal.affordability.toUpperCase()}</OpenSansText>
+      </View>
+      <Text style={styles.title}>Ingredients</Text>
+      {selectedMeal.ingredients.map(ingredient => (
+        <ListItem key={ingredient}>{ingredient}</ListItem>
+      ))}
+      <Text style={styles.title}>Steps</Text>
+      {selectedMeal.steps.map(step => (
+        <ListItem key={step}>{step}</ListItem>
+      ))}
+    </ScrollView>
+  );
+};
+
+RecipeScreen.navigationOptions = navigationData => {
+  const mealId = navigationData.navigation.getParam("recipeId");
+  const selectedMeal = MEALS.find(meal => meal.id === mealId);
   return {
-    headerTitle: recipe.title,
+    headerTitle: selectedMeal.title,
     headerRight: (
       <HeaderButtons HeaderButtonComponent={HeaderButton}>
         <Item
           title="Favorite"
-          iconName="ios-star-outline"
+          iconName="ios-star"
           onPress={() => {
             console.log("Mark as favorite!");
           }}
@@ -37,11 +60,24 @@ RecipeScreen.navigationOptions = navigationData => {
 };
 
 const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center"
+  image: {
+    width: "100%",
+    height: 200
+  },
+  details: {
+    flexDirection: "row",
+    padding: 15,
+    justifyContent: "space-around"
+  },
+  title: {
+    fontFamily: "open-sans-bold",
+    fontSize: 22,
+    textAlign: "center",
+    marginBottom: 20
+  },
+  listItem: {
+    marginVertical: 5,
+    marginHorizontal: 20
   }
 });
-
 export default RecipeScreen;
