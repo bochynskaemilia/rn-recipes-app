@@ -20,7 +20,14 @@ const CategoryMealsScreen = ({ navigation }) => {
         complexity={item.complexity}
         duration={item.duration}
         title={item.title}
-        onSelectMeal={() => {}}
+        onSelectMeal={() =>
+          navigation.navigate({
+            routeName: "Recipe",
+            params: {
+              recipeId: itemData.item.id
+            }
+          })
+        }
       />
     );
   };
