@@ -4,7 +4,7 @@ import * as Font from "expo-font";
 import { AppLoading } from "expo";
 import { useScreens } from "react-native-screens";
 
-import RecipesNavigator from "./navigation/RecipesNavigator";
+import Navigator from "./navigation/Navigator";
 
 useScreens();
 
@@ -22,5 +22,5 @@ export default function App() {
     return <AppLoading startAsync={fetchFonts} onFinish={() => setFontLoaded(true)} />;
   }
 
-  return <RecipesNavigator />;
+  return <Navigator />;
 }
