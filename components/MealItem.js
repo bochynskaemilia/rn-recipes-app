@@ -9,6 +9,7 @@ import {
   ImageBackground
 } from "react-native";
 
+import OpenSansText from "./OpenSansText";
 import Colors from "../constants/Colors";
 
 const MealItem = ({ complexity, affordability, duration, title, onSelectMeal, image }) => {
@@ -31,9 +32,9 @@ const MealItem = ({ complexity, affordability, duration, title, onSelectMeal, im
             </ImageBackground>
           </View>
           <View style={{ ...styles.mealRow, ...styles.mealDetail }}>
-            <Text>{duration} mins.</Text>
-            <Text>{complexity}</Text>
-            <Text>{affordability}</Text>
+            <OpenSansText>{duration} mins.</OpenSansText>
+            <OpenSansText>{complexity}</OpenSansText>
+            <OpenSansText>{affordability}</OpenSansText>
           </View>
         </View>
       </TouchableCmp>
@@ -78,6 +79,9 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: Colors.accentColor,
     textAlign: "center"
+  },
+  caption: {
+    fontFamily: "open"
   }
 });
 

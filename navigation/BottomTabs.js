@@ -28,7 +28,10 @@ const RecipesFavTabNavigator = createBottomTabNavigator(
   },
   {
     tabBarOptions: {
-      activeTintColor: Colors.primaryColor
+      activeTintColor: Colors.primaryColor,
+      labelStyle: {
+        fontFamily: "open-sans"
+      }
     }
   }
 );

@@ -1,5 +1,5 @@
 import { createAppContainer } from "react-navigation";
 
-import RecipesFavTabNavigator from "./BottomTabs";
+import DrawerNavigator from "./Drawer";
 
-export default createAppContainer(RecipesFavTabNavigator);
+export default createAppContainer(DrawerNavigator);
