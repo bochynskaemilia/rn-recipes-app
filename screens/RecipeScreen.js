@@ -20,6 +20,9 @@ const RecipeScreen = props => {
 
   const mealId = props.navigation.getParam("recipeId");
   const meals = useSelector(state => state.meals.meals);
+  const currentMealIsFav = useSelector(state =>
+    state.meals.favoriteMeals.some(meal => meal.id === mealId)
+  );
 
   const selectedMeal = meals.find(meal => meal.id === mealId);
 
@@ -30,6 +33,10 @@ const RecipeScreen = props => {
   useEffect(() => {
     props.navigation.setParams({ toggleFavorite: toggleFavoriteHandler });
   }, [toggleFavoriteHandler]);
+
+  useEffect(() => {
+    props.navigation.setParams({ isFav: currentMealIsFav });
+  }, [currentMealIsFav]);
 
   return (
     <ScrollView>
@@ -54,11 +61,17 @@ const RecipeScreen = props => {
 RecipeScreen.navigationOptions = navigationData => {
   const toggleFavorite = navigationData.navigation.getParam("toggleFavorite");
   const recipeTitle = navigationData.navigation.getParam("recipeTitle");
+  const isFav = navigationData.navigation.getParam("isFav");
+
   return {
     headerTitle: recipeTitle,
     headerRight: (
       <HeaderButtons HeaderButtonComponent={HeaderButton}>
-        <Item title="Favorite" iconName="ios-star" onPress={toggleFavorite} />
+        <Item
+          title="Favorite"
+          iconName={isFav ? "ios-star" : "ios-star-outline"}
+          onPress={toggleFavorite}
+        />
       </HeaderButtons>
     )
   };
@@ -85,4 +98,5 @@ const styles = StyleSheet.create({
     marginHorizontal: 20
   }
 });
+
 export default RecipeScreen;
