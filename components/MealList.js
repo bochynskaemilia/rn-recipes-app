@@ -18,7 +18,8 @@ const MealList = ({ listData, navigation }) => {
           navigation.navigate({
             routeName: "Recipe",
             params: {
-              recipeId: itemData.item.id
+              recipeId: itemData.item.id,
+              recipeTitle: itemData.item.title
             }
           })
         }
